@@ -1,24 +1,27 @@
 <?php
 
 /*
-Copyright Kaxu-64
-Utilisation autorisé, pensez à citer la source !
-kaxu64.github.com
-
-
-Version 1.0
-Fonctions disponible :
-	-- bool estBanni( string )
-	-- bool pseudoLibre ( string )
-	-- int nombreDeJour ( string ) 
-	-- int nombreDeMessage ( string )
-	-- int messagePage ( string )
-	-- string[] getPseudoPage ( string ) 
-	-- string[] getDatePage ( string )
-	-- string[] getHeurePage ( string )
-	-- int nombreDePage( string )
-	-- string[] liensPages( string )
+* Copyright Kaxu-64
+* Utilisation autorisé, pensez à citer la source !
+* github.com/kaxu64
+*
+*
+* Version 1.0
+* Fonctions disponible :
+*	-- bool estBanni( string )
+*	-- bool pseudoLibre ( string )
+*	-- int nombreDeJour ( string ) 
+*	-- int nombreDeMessage ( string )
+*	-- int messagePage ( string )
+*	-- string[] getPseudoPage ( string ) 
+*	-- string[] getDatePage ( string )
+*	-- string[] getHeurePage ( string )
+*	-- int nombreDePage( string )
+*	-- string[] liensPages( string )
+*
 */
+
+
 function pseudoLibre($pseudo)
 {
 					$adressejvc1="http://www.jeuxvideo.com/profil/";
