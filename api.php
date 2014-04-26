@@ -4,6 +4,7 @@
 * Copyright Kaxu-64
 * Utilisation autorisé, pensez à citer la source !
 * github.com/kaxu64
+* Regardez la page comment-utiliser.php pour plus de renseignements
 *
 *
 * Version 1.0
@@ -18,9 +19,9 @@
 *	-- string[] getHeurePage ( string )
 *	-- int nombreDePage( string )
 *	-- string[] liensPages( string )
-*
+*	-- string[] getMessagePage( string )
+*	-- string[][] toutPseudoTopic( $string )
 */
-
 
 function pseudoLibre($pseudo)
 {
@@ -169,7 +170,7 @@ function getPseudoPage($lien)
 					curl_close($curl);
 					
 					$messagePage = messagePage($lien);
-					$debut = 0;
+					$debut = 3;
 					$compteur = 0;
 					
 					$listePseudo = array();
@@ -177,7 +178,7 @@ function getPseudoPage($lien)
 					{
 							$i = 17;
 							
-							if ($return[$debut] == 'p' && $return[$debut+1] == 's' && $return[$debut+2] == 'e' && $return[$debut+3] == 'u' && $return[$debut+4] == 'd' && $return[$debut+5] == 'o' )
+							if ( $return[$debut-2] == "=" && $return[$debut-1] == "\"" && $return[$debut] == 'p' && $return[$debut+1] == 's' && $return[$debut+2] == 'e' && $return[$debut+3] == 'u' && $return[$debut+4] == 'd' && $return[$debut+5] == 'o' )
 							{ 
 						
 									$pseudo = '';
@@ -382,6 +383,7 @@ function liensPages( $lien )
 					return $liensPages;
 }
 
+
 function toutPseudoTopic ( $lien )
 {
 
@@ -394,16 +396,54 @@ function toutPseudoTopic ( $lien )
 					$listePseudo = array();
 					$lPage  = liensPages( $lien );
 					$nbPage = nombreDePage($lien);
-					$listePseudoPage = getPseudoPage($lien);
+					
 					for ($j = 0; $j< $nbPage; $j++)
 					{
+						$listePseudoPage = getPseudoPage($lPage[$j]);
 						$msPage = messagePage($lPage[$j]);
 						for ($i = 0; $i< $msPage; $i++)
 						{
-							$listePseudo[0][$i]= $listePseudoPage[$i];
+							$listePseudo[$j][$i]= $listePseudoPage[$i];
 						}
 					}
 					return $listePseudo;
+}
+
+
+
+function getMessagePage($lien)
+{
+					$curl = curl_init($lien);
+					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($curl, CURLOPT_COOKIESESSION, true); 
+					$return = curl_exec($curl);
+					curl_close($curl);
+					
+					$messagePage = messagePage($lien);
+					$debut = 0;
+					$compteur = 0;
+					
+					$listeMessage = array();
+					while ($compteur != $messagePage)
+					{
+							$i = 8;
+							if ($return[$debut] == '=' && $return[$debut+1] == '"' && $return[$debut+2] == 'p' && $return[$debut+3] == 'o' && $return[$debut+4] == 's' && $return[$debut+5] == 't' )
+							{ 
+						
+									$message = '';
+									while(!($return[$debut+$i] == "<" && $return[$debut+$i+1] == "/" && $return[$debut+$i+2] == "l" && $return[$debut+$i+3] == "i" ))
+									{
+										
+										$message = $message.$return[$debut+$i];
+										$i++;
+									}
+									$listeMessage[$compteur] = $message;
+									$compteur++;
+							}
+							$debut++;
+					}
+					return $listeMessage;
+					
 }
 
 ?>
