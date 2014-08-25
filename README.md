@@ -49,4 +49,4 @@ La documentation ainsi que des exemples de codes sont disponible.
 
 ### Me contacter
 * Par mail ( kaxu64@gmail.com )
-* Sur JVC : Kaxu-64 , PHP_FUNCTION
+* Sur JVC : Kaxu-64 
